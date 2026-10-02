@@ -1,0 +1,397 @@
+@import 'tailwindcss';
+
+/* =========================================================================
+   FIELD OPERATIONS — International Tactical Security Services
+   Design tokens. Navy is structural, ivory is editorial, brass is an accent.
+   ========================================================================= */
+
+@theme {
+  /* Core palette — verbatim from the approved brief */
+  --color-navy: #101f2b;
+  --color-navy-deep: #0a151e;
+  --color-ivory: #f4f3ef;
+  --color-white: #ffffff;
+  --color-brass: #c5a56a;
+  --color-ink: #35414a;
+  --color-ink-muted: #5d6870;
+  --color-rule: #dfe1dd;
+
+  /* Derived tints, used only for hover/press and hairline separation */
+  --color-navy-lift: #172a38;
+  --color-navy-line: #24384a;
+  --color-ivory-deep: #ebe9e3;
+  --color-ink-soft: #4a5761;
+  /* Smallest text tone still used on light grounds. Kept at or above 4.5:1 on
+     ivory-deep, which is the lightest surface it is ever placed on. */
+  --color-ink-faint: #5f6970;
+  /* Darkened brass for small text on ivory/white; the raw brass accent is a
+     fill colour and only passes contrast on navy grounds. */
+  --color-brass-deep: #7d6335;
+  --color-brass-wash: #f0e7d6;
+
+  --font-display: var(--font-newsreader), 'Iowan Old Style', Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, 'SFMono-Regular', monospace;
+
+  --spacing-gutter: 1.5rem;
+  --spacing-section: 5rem;
+}
+
+@media (min-width: 768px) {
+  @theme {
+    --spacing-gutter: 2.5rem;
+    --spacing-section: 7.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  @theme {
+    --spacing-gutter: 3.5rem;
+  }
+}
+
+/* =========================================================================
+   Base
+   ========================================================================= */
+
+@layer base {
+  * {
+    border-color: var(--color-rule);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Sticky header clearance for in-page anchors */
+    scroll-padding-top: 6.5rem;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-navy);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-brass);
+    color: var(--color-navy-deep);
+  }
+
+  /* Visible, consistent focus ring everywhere */
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* Images never overflow their frame */
+  img,
+  picture,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+/* =========================================================================
+   Typography scale — fluid, restrained, no oversized viewport domination
+   ========================================================================= */
+
+@layer components {
+  .t-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 6.2vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+  }
+
+  .t-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4.6vw, 3.75rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+  }
+
+  .t-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.2vw, 2.85rem);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    font-weight: 500;
+  }
+
+  .t-h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 1.9vw, 1.7rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+
+  .t-lead {
+    font-size: clamp(1.0625rem, 0.4vw + 1rem, 1.3125rem);
+    line-height: 1.6;
+  }
+
+  .t-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .t-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* Italic serif used for pull quotes — editorial voice */
+  .t-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* =========================================================================
+   Layout helpers
+   ========================================================================= */
+
+@layer components {
+  .shell {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 82.5rem;
+    padding-inline: var(--spacing-gutter);
+  }
+
+  /* Fine hairline used to separate editorial blocks */
+  .rule-t {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  .rule-t-navy {
+    border-top: 1px solid var(--color-navy-line);
+  }
+
+  /* Brass tick — the one recurring decorative motif */
+  .tick {
+    display: inline-block;
+    width: 1.75rem;
+    height: 2px;
+    background-color: var(--color-brass);
+  }
+
+  /* Focus ring for dark surfaces, where brass-on-navy needs more presence */
+  .on-navy :focus-visible {
+    outline-color: var(--color-brass);
+  }
+}
+
+/* =========================================================================
+   Long-form article body
+   ========================================================================= */
+
+@layer components {
+  .prose-intac {
+    color: var(--color-ink);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+
+  .prose-intac > * + * {
+    margin-top: 1.35em;
+  }
+
+  .prose-intac h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--color-navy);
+    margin-top: 2.4em;
+    margin-bottom: -0.35em;
+    letter-spacing: -0.015em;
+  }
+
+  .prose-intac h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+    font-weight: 500;
+    color: var(--color-navy);
+    margin-top: 1.9em;
+    margin-bottom: -0.4em;
+  }
+
+  .prose-intac strong {
+    color: var(--color-navy);
+    font-weight: 600;
+  }
+
+  .prose-intac em {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.06em;
+  }
+
+  .prose-intac ul,
+  .prose-intac ol {
+    padding-left: 1.35rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .prose-intac ul > li {
+    list-style: none;
+    position: relative;
+  }
+
+  .prose-intac ul > li::before {
+    content: '';
+    position: absolute;
+    left: -1.15rem;
+    top: 0.72em;
+    width: 0.4rem;
+    height: 1px;
+    background-color: var(--color-brass);
+  }
+
+  .prose-intac ol {
+    list-style: decimal;
+  }
+
+  .prose-intac ol > li::marker {
+    font-family: var(--font-mono);
+    font-size: 0.8em;
+    color: var(--color-brass-deep);
+  }
+
+  .prose-intac a {
+    color: var(--color-navy);
+    text-decoration: underline;
+    text-decoration-color: var(--color-brass);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .prose-intac a:hover {
+    text-decoration-color: var(--color-brass-deep);
+  }
+
+  .prose-intac blockquote {
+    border-left: 2px solid var(--color-brass);
+    padding-left: 1.5rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.45;
+    color: var(--color-navy);
+  }
+}
+
+/* =========================================================================
+   Motion — subtle, opt-in, and fully disabled on request
+   ========================================================================= */
+
+@keyframes intac-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes intac-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  /* Content is visible by default; the pending state is only ever applied
+     after hydration, and only to genuinely off-screen elements. */
+  [data-reveal='pending'] {
+    opacity: 0;
+  }
+
+  [data-reveal='in'] {
+    animation: intac-rise 0.7s cubic-bezier(0.22, 0.68, 0.32, 1) both;
+  }
+
+  .anim-rise {
+    animation: intac-rise 0.7s cubic-bezier(0.22, 0.68, 0.32, 1) both;
+  }
+
+  .anim-fade {
+    animation: intac-fade 0.5s ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .anim-rise,
+  .anim-fade,
+  [data-reveal='in'] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  [data-reveal='pending'] {
+    opacity: 1 !important;
+  }
+}

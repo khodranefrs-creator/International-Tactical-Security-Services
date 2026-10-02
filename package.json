@@ -1,0 +1,36 @@
+{
+  "name": "international-tactical-security-services",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "verify:media": "node check-media-refs.js",
+    "verify:tokens": "node check-tokens-selftest.js && node check-tokens.js",
+    "verify:reveal": "node check-reveal.js",
+    "verify:content": "node check-content.js",
+    "verify:layout": "node verify.js",
+    "fix:assets": "node fix-assets.js",
+    "verify": "npm run typecheck && npm run lint && npm run build && npm run verify:media && npm run verify:tokens"
+  },
+  "dependencies": {
+    "next": "16.3.8",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.8",
+    "playwright": "^1.63.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
