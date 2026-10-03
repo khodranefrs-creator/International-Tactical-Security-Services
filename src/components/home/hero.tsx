@@ -16,10 +16,13 @@ export function Hero() {
   return (
     <Section tone="navy-deep" pad="none" className="relative overflow-hidden">
       <div className="grid lg:grid-cols-12">
-        {/* Text panel */}
-        <div className="order-2 flex flex-col justify-center px-gutter pb-16 pt-14 md:pb-20 md:pt-20 lg:order-1 lg:col-span-6 lg:py-28 xl:col-span-6">
+        {/* Text panel — 8 of 12 columns at lg, 7 at xl. The extra width gives the
+            display line a proper editorial measure without shrinking the type,
+            and keeps the photograph's column narrow enough to cover at native
+            detail. */}
+        <div className="order-2 flex flex-col justify-center px-gutter pb-10 pt-9 md:pb-12 md:pt-12 lg:order-1 lg:col-span-8 lg:py-12 xl:col-span-7 xl:py-16">
           <div className="mx-auto w-full max-w-[82.5rem] lg:mx-0 lg:max-w-none">
-            <div className="lg:max-w-[36rem] lg:pr-6">
+            <div className="lg:max-w-[46rem]">
               <Reveal>
                 <p className="t-eyebrow flex items-center gap-3 text-brass">
                   <span aria-hidden="true" className="h-px w-8 bg-brass" />
@@ -28,19 +31,19 @@ export function Hero() {
               </Reveal>
 
               <Reveal delay={1}>
-                <h1 className="t-display mt-8 text-ivory">
+                <h1 className="t-display mt-5 max-w-[38rem] text-ivory md:mt-6 lg:max-w-none">
                   Professional security for the places you operate.
                 </h1>
               </Reveal>
 
               <Reveal delay={2}>
-                <p className="t-quote mt-8 text-[1.375rem] leading-[1.35] text-brass md:text-[1.5rem]">
+                <p className="t-quote mt-5 text-[1.375rem] leading-[1.35] text-brass md:mt-6 md:text-[1.5rem]">
                   Your security is our business.
                 </p>
               </Reveal>
 
               <Reveal delay={3}>
-                <p className="t-lead mt-7 max-w-lg text-ivory/70">
+                <p className="t-lead mt-4 max-w-[34rem] text-ivory/70 md:mt-5">
                   A family-owned private security company serving commercial businesses,
                   retail, banks and events across {site.serviceArea}. Former law enforcement,
                   military and SWAT backgrounds. Licensed in Oregon and Washington.
@@ -48,7 +51,7 @@ export function Hero() {
               </Reveal>
 
               <Reveal delay={4}>
-                <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center md:mt-8">
                   <ActionLink href={primaryCta.href} tone="brass" size="lg">
                     {primaryCta.label} <ArrowGlyph />
                   </ActionLink>
@@ -59,7 +62,7 @@ export function Hero() {
               </Reveal>
 
               <Reveal delay={5}>
-                <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-navy-line pt-7">
+                <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-navy-line pt-5">
                   <a
                     href={primaryPhone.href}
                     className="t-meta flex items-center gap-2.5 text-ivory transition-colors hover:text-brass"
@@ -77,15 +80,18 @@ export function Hero() {
         </div>
 
         {/* Photograph */}
-        <div className="order-1 relative lg:order-2 lg:col-span-6">
-          <div className="relative aspect-[4/3] w-full sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-[34rem] xl:min-h-[38rem]">
+        <div className="order-1 relative lg:order-2 lg:col-span-4 xl:col-span-5">
+          {/* 16:10 sits close to the 3:2 source, so the stacked layouts crop
+              very little. On desktop the box follows the text column's height;
+              min-h is only a floor, never a driver. */}
+          <div className="relative aspect-[16/10] w-full lg:aspect-auto lg:h-full lg:min-h-[30rem] xl:min-h-[34rem]">
             <Image
               src="/media/hero/armed-security-guard.jpg"
               alt="Armed private security officer standing guard at a commercial property"
               fill
               priority
               fetchPriority="high"
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              sizes="(min-width: 1024px) 125vh, 100vw"
               className="object-cover object-[58%_35%]"
             />
             {/* Subtle inner edge so the photograph meets the panel deliberately */}

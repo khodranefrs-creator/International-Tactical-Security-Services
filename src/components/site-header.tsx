@@ -118,7 +118,9 @@ function ServicesMenu() {
           <div className="mt-2 border-t border-rule px-5 pt-3 pb-3">
             <Link
               href="/services/"
-              className="t-meta inline-flex items-center gap-2 uppercase tracking-[0.13em] text-brass-deep hover:text-navy"
+              /* min-h matches the service links above (45px) so the whole
+                 dropdown shares one hit area. */
+              className="t-meta inline-flex min-h-[2.8125rem] items-center gap-2 uppercase tracking-[0.13em] text-brass-deep hover:text-navy"
             >
               All services <ArrowGlyph />
             </Link>
@@ -152,14 +154,14 @@ function MobileNav({ onClose }: { onClose: () => void }) {
         className="absolute inset-0 h-full w-full cursor-default bg-navy-deep/70"
         tabIndex={-1}
       />
-      <div className="anim-fade absolute inset-y-0 right-0 flex w-[min(23rem,90vw)] flex-col overflow-y-auto bg-ivory">
-        <div className="flex items-center justify-between border-b border-rule px-6 py-5">
+      <div className="anim-fade absolute inset-y-0 right-0 flex w-[min(23rem,90vw)] flex-col overflow-y-auto overscroll-contain bg-ivory">
+        <div className="flex shrink-0 items-center justify-between border-b border-rule px-6 py-5">
           <Logo tone="light" priority />
           <button
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="-mr-2 flex h-10 w-10 items-center justify-center text-navy transition-colors hover:text-brass-deep"
+            className="-mr-2 flex h-11 w-11 shrink-0 items-center justify-center text-navy transition-colors hover:text-brass-deep"
           >
             <svg aria-hidden="true" viewBox="0 0 16 16" className="h-4 w-4" fill="none">
               <path d="M1 1l14 14M15 1L1 15" stroke="currentColor" strokeWidth="1.4" />
@@ -167,7 +169,9 @@ function MobileNav({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        <nav aria-label="Mobile" className="flex-1 px-6 py-7">
+        {/* min-h-0 lets this flex child actually scroll inside the panel
+            instead of pushing the contact block out of view. */}
+        <nav aria-label="Mobile" className="min-h-0 flex-1 px-6 py-6">
           <ul className="flex flex-col">
             {mainNav
               .filter((n) => n.href !== '/contact/')
@@ -184,13 +188,13 @@ function MobileNav({ onClose }: { onClose: () => void }) {
                     {item.label}
                   </Link>
                   {item.href === '/services/' ? (
-                    <ul className="mb-4 flex flex-col gap-2.5 pl-3">
+<ul className="mb-3.5 flex flex-col gap-2 pl-3">
                       {serviceLinks.map((s) => (
                         <li key={s.href}>
                           <Link
                             href={s.href}
                             onClick={onClose}
-                            className="t-meta flex items-center gap-2.5 uppercase tracking-[0.1em] text-ink-muted hover:text-navy"
+                            className="t-meta flex items-center gap-2.5 py-0.5 uppercase tracking-[0.1em] text-ink-muted hover:text-navy"
                           >
                             <span aria-hidden="true" className="h-px w-3 bg-brass" />
                             {s.label}
@@ -204,7 +208,7 @@ function MobileNav({ onClose }: { onClose: () => void }) {
           </ul>
         </nav>
 
-        <div className="border-t border-rule bg-white px-6 py-6">
+        <div className="shrink-0 border-t border-rule bg-white px-6 py-6">
           <ActionLink href={primaryCta.href} tone="brass" size="md" full>
             {primaryCta.label}
           </ActionLink>
@@ -253,21 +257,23 @@ export function SiteHeader() {
     <header className="sticky top-0 z-[90]">
       {/* Utility strip — scrolls away, keeps the sticky bar short */}
       <div className="hidden bg-navy-deep text-ivory/70 lg:block">
-        <div className="mx-auto flex max-w-[82.5rem] items-center justify-between px-gutter py-2">
+        {/* The links carry their own vertical padding so they reach a 24px
+            minimum hit area without making the strip any taller. */}
+        <div className="mx-auto flex max-w-[82.5rem] items-center justify-between px-gutter">
           <p className="t-meta tracking-[0.12em] uppercase">
             Portland, Oregon&nbsp;&nbsp;·&nbsp;&nbsp;Vancouver, Washington
           </p>
           <div className="flex items-center gap-6">
             <a
               href={mailtoHref}
-              className="t-meta transition-colors hover:text-ivory"
+              className="t-meta inline-flex items-center py-1 transition-colors hover:text-ivory"
             >
               info@internationaltacticalsecurity.com
             </a>
             <span aria-hidden="true" className="h-3 w-px bg-ivory/20" />
             <a
               href={tollFreePhone.href}
-              className="t-meta transition-colors hover:text-ivory"
+              className="t-meta inline-flex items-center py-1 transition-colors hover:text-ivory"
             >
               {tollFreePhone.label}
             </a>
@@ -278,7 +284,7 @@ export function SiteHeader() {
       {/* Primary bar */}
       <div className="border-b border-rule bg-ivory/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-[82.5rem] items-center justify-between gap-6 px-gutter py-3.5 lg:py-4">
-          <Link href="/" aria-label="International Tactical Security Services — home" className="flex items-center gap-3">
+          <Link href="/" aria-label="International Tactical Security Services — home" className="flex shrink-0 items-center gap-3 py-1 lg:py-0">
             <Logo tone="light" priority />
             <span className="hidden sm:block">
               <span className="block font-display text-[0.9375rem] leading-[1.15] font-medium tracking-[-0.005em] text-navy">
@@ -318,7 +324,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-4">
             <a
               href={primaryPhone.href}
-              className="hidden items-center gap-2.5 text-navy transition-colors hover:text-brass-deep md:flex"
+              className="hidden shrink-0 items-center gap-2.5 py-1 text-navy transition-colors hover:text-brass-deep md:flex"
             >
               <svg aria-hidden="true" viewBox="0 0 14 14" className="h-3.5 w-3.5 text-brass" fill="none">
                 <path
@@ -345,7 +351,7 @@ export function SiteHeader() {
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
               aria-expanded={menuOpen}
-              className="-mr-1.5 flex h-10 w-10 items-center justify-center text-navy transition-colors hover:text-brass-deep lg:hidden"
+              className="-mr-2 flex h-11 w-11 shrink-0 items-center justify-center text-navy transition-colors hover:text-brass-deep lg:hidden"
             >
               <svg aria-hidden="true" viewBox="0 0 20 14" className="h-3.5 w-5" fill="none">
                 <path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" strokeWidth="1.4" />

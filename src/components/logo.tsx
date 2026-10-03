@@ -47,7 +47,11 @@ export function Logo({
       height={spec.px}
       sizes={`${spec.px}px`}
       priority={priority}
-      className={`${spec.className} w-auto shrink-0 ${className ?? ''}`}
+      /* The badge is square (1:1), so an explicit square box cannot distort it.
+         `w-auto` is deliberately absent: combined with the global
+         `img { max-width: 100% }` it allowed the width to be capped by a
+         squeezed flex parent while the height stayed fixed. */
+      className={`${spec.className} shrink-0 ${className ?? ''}`}
     />
   );
 }
