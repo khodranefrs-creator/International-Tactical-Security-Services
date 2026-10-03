@@ -85,9 +85,14 @@ export function Hero() {
               very little. On desktop the box follows the text column's height;
               min-h is only a floor, never a driver. */}
           <div className="relative aspect-[16/10] w-full lg:aspect-auto lg:h-full lg:min-h-[30rem] xl:min-h-[34rem]">
+            {/* Provisional swap: the previous source featured a firearm prominently,
+                which conflicts with the commercial-security positioning. The
+                replacement is the same 2000x1335 / 3:2 frame, so `object-position`
+                and `sizes` are unchanged — only the pixels differ. Alt text is
+                deliberately generic pending a visual review of the new subject. */}
             <Image
-              src="/media/hero/armed-security-guard.jpg"
-              alt="Armed private security officer standing guard at a commercial property"
+              src="/media/services/bodyguard-suit.jpg"
+              alt="Private security officer on duty at a commercial property"
               fill
               priority
               fetchPriority="high"
